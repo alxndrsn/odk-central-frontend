@@ -18,7 +18,7 @@ except according to the terms contained in the LICENSE file.
         </div>
         <div class="panel-body">
           <div class="panel-footer">
-            <a href="/v1/oidc/1">
+            <a href="/v1/oidc/login">
               <button class="btn btn-primary">
                 {{ $t('action.logIn') }}
               </button>
