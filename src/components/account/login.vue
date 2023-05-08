@@ -17,6 +17,15 @@ except according to the terms contained in the LICENSE file.
           <h1 class="panel-title">{{ $t('action.logIn') }}</h1>
         </div>
         <div class="panel-body">
+          <div class="panel-footer">
+            <a href="/v1/oidc/1">
+              <button class="btn btn-primary">
+                {{ $t('action.logIn') }}
+              </button>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
           <form @submit.prevent="submit">
             <form-group ref="email" v-model.trim="email" type="email"
               :placeholder="$t('field.email')" required autocomplete="off"/>
