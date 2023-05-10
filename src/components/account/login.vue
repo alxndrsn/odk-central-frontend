@@ -17,14 +17,6 @@ except according to the terms contained in the LICENSE file.
           <h1 class="panel-title">{{ $t('action.logIn') }}</h1>
         </div>
         <div class="panel-body" v-if="config.oidcEnabled">
-          <div>
-            <pre>
-              # TODO
-
-              * check with server if OIDC login should be used
-              * hide uname/password login if OIDC should be used; otherwise hide this
-            </pre>
-          </div>
           <div class="panel-footer">
             <a href="/v1/oidc/login">
               <button class="btn btn-primary">
