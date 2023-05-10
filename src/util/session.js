@@ -205,6 +205,8 @@ export const useSessions = () => {
 
 export const restoreSession = (session) => {
   const sessionExpires = localStore.getItem('sessionExpires');
+  console.log('restoreSession()', session, sessionExpires);
+  console.log('restoreSession()', 'expired?', parseInt(sessionExpires, 10) <= Date.now());
   // We send a request if sessionExpires == null, partly in case there was a
   // logout error.
   if (sessionExpires != null && parseInt(sessionExpires, 10) <= Date.now())
