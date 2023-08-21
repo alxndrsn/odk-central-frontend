@@ -32,6 +32,9 @@ except according to the terms contained in the LICENSE file.
         <a id="navbar-actions-log-out" href="#" @click.prevent="logOut">
           {{ $t('action.logOut') }}
         </a>
+        <a id="navbar-actions-log-out-oidc" href="/v1/oidc/logout">
+          OIDC Logout (experimental)
+        </a>
       </li>
     </ul>
   </li>
