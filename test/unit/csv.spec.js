@@ -1,6 +1,5 @@
 import sinon from 'sinon';
 import { identity } from 'ramda';
-import { describe, it } from 'vitest'
 
 import createCentralI18n from '../../src/i18n';
 import { formatCSVDelimiter, formatCSVRow, parseCSV, parseCSVHeader } from '../../src/util/csv';
