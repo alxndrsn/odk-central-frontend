@@ -80,5 +80,8 @@ export default defineConfig(({ mode }) => ({
         { browser: 'chromium' },
       ],
     },
+    onConsoleLog(log) {
+      return true;
+    },
   },
 }));
