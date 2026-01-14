@@ -43,6 +43,9 @@ const devServer = {
 export default defineConfig(({ mode }) => ({
   resolve: {
     conditions: ['browser'],
+    alias: {
+      'vue': 'vue/dist/vue.esm-bundler.js',
+    },
   },
   plugins: [
     vue(),

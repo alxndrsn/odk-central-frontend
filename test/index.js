@@ -1,5 +1,6 @@
 import sinon from 'sinon';
-import { enableAutoUnmount } from '@vue/test-utils';
+import { config, enableAutoUnmount } from '@vue/test-utils';
+import { Translation } from 'vue-i18n';
 import { expect, should } from 'chai';
 
 import '../src/styles';
@@ -10,6 +11,7 @@ import testData from './data';
 import { loadAsyncRouteComponents } from './util/load-async';
 import { mockLogin } from './util/session';
 import { setupLanguages } from './util/i18n';
+import i18n from '../src/i18n';
 import './assertions';
 
 //window.beforeAll = before; // eslint-disable-line no-undef
@@ -19,6 +21,16 @@ window.test = it;
 window.should = should();
 window.expect = expect;
 
+config.global.plugins = [i18n];
+config.global.components = {
+  'i18n-t': Translation
+};
+config.global.stubs = {
+  ...config.global.stubs,
+  flatpickr: { // simplify stuff; hopefully we aren't testing this directly anywhere
+    template: '<input class="flatpickr-input"/>',
+  }
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -49,7 +61,7 @@ afterEach(() => {
   mockLogin.reset();
   document.cookie = '';
 });
-setupLanguages(afterEach);
+setupLanguages(afterEach); // FIXME not required?
 
 
 
