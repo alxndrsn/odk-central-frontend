@@ -1,5 +1,6 @@
 import sinon from 'sinon';
 import { identity } from 'ramda';
+import { describe, it, expect } from 'vitest'
 
 import createCentralI18n from '../../src/i18n';
 import { formatCSVDelimiter, formatCSVRow, parseCSV, parseCSVHeader } from '../../src/util/csv';
@@ -8,7 +9,7 @@ import { noop } from '../../src/util/util';
 const i18n = createCentralI18n().global;
 const createCSV = (text) => new File([text], 'my_data.csv');
 
-describe('util/csv', () => {
+describe.only('util/csv', () => {
   describe('parseCSVHeader()', () => {
     it('returns the values of the first row', async () => {
       const csv = createCSV('a,"b,c","d\ne"\n1,2,3');

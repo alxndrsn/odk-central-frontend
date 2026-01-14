@@ -13,7 +13,9 @@ except according to the terms contained in the LICENSE file.
 // eslint-disable-next-line import/no-unresolved
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 import vue from '@vitejs/plugin-vue';
+import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vite';
+import { configDefaults } from 'vitest/config';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'url';
 
@@ -39,6 +41,12 @@ const devServer = {
 };
 
 export default defineConfig(({ mode }) => ({
+  resolve: {
+    alias: {
+      'playwright': resolve(__dirname, './mock-playwright.js'),
+      'playwright-core': resolve(__dirname, './mock-playwright.js'),
+    },
+  },
   plugins: [
     vue(),
     VueI18nPlugin({
@@ -58,8 +66,25 @@ export default defineConfig(({ mode }) => ({
   },
   // Not sure why this is needed in addition to build.target above and why it's
   // only an issue in development. `npm run dev` doesn't work without this.
-  optimizeDeps: mode === 'development'
-    ? { esbuildOptions: { target: buildTarget } }
-    : {},
-  server: devServer
+  optimizeDeps: {
+    esbuildOptions: {
+      target: buildTarget,
+    },
+  },
+  server: devServer,
+  test: {
+    browser: {
+      enabled: true,
+      provider: playwright(),
+      instances: [
+        { browser: 'chromium' },
+      ],
+    },
+    include: ['test/**/*.{test,spec}.{js,ts,jsx,tsx}'],
+    server: {
+      deps: {
+        external: [/playwright-core/],
+      },
+    },
+  },
 }));
