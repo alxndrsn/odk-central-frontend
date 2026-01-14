@@ -12,8 +12,8 @@ import { mockLogin } from './util/session';
 import { setupLanguages } from './util/i18n';
 import './assertions';
 
-window.beforeAll = before; // eslint-disable-line no-undef
-window.afterAll = after; // eslint-disable-line no-undef
+//window.beforeAll = before; // eslint-disable-line no-undef
+//window.afterAll = after; // eslint-disable-line no-undef
 window.test = it;
 
 window.should = should();
@@ -53,12 +53,12 @@ setupLanguages(afterEach);
 
 
 
-////////////////////////////////////////////////////////////////////////////////
-// RUN TESTS
-
-// Run all tests. See the documentation for karma-webpack. We specify the files
-// here rather than in karma.conf.js, because doing so is more performant. When
-// I tried specifying the tests in karma.conf.js, I encountered an out-of-memory
-// error.
-const testsContext = require.context('.', true, /\.spec\.js$/);
-testsContext.keys().forEach(testsContext);
+//////////////////////////////////////////////////////////////////////////////////
+//// RUN TESTS
+//
+//// Run all tests. See the documentation for karma-webpack. We specify the files
+//// here rather than in karma.conf.js, because doing so is more performant. When
+//// I tried specifying the tests in karma.conf.js, I encountered an out-of-memory
+//// error.
+//const testsContext = require.context('.', true, /\.spec\.js$/);
+//testsContext.keys().forEach(testsContext);

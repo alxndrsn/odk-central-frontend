@@ -42,10 +42,7 @@ const devServer = {
 
 export default defineConfig(({ mode }) => ({
   resolve: {
-    alias: {
-      'playwright': resolve(__dirname, './mock-playwright.js'),
-      'playwright-core': resolve(__dirname, './mock-playwright.js'),
-    },
+    conditions: ['browser'],
   },
   plugins: [
     vue(),
@@ -73,18 +70,15 @@ export default defineConfig(({ mode }) => ({
   },
   server: devServer,
   test: {
+    globals: true,
+    setupFiles: ['./test/index.js'],
+    include: ['test/**/*.{test,spec}.{js,ts,jsx,tsx}'],
     browser: {
       enabled: true,
       provider: playwright(),
       instances: [
         { browser: 'chromium' },
       ],
-    },
-    include: ['test/**/*.{test,spec}.{js,ts,jsx,tsx}'],
-    server: {
-      deps: {
-        external: [/playwright-core/],
-      },
     },
   },
 }));
