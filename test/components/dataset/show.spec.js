@@ -7,8 +7,6 @@ import { findTab, textWithout } from '../../util/dom';
 import { load } from '../../util/http';
 import { mockLogin } from '../../util/session';
 
-import { beforeEach, afterEach, vi } from 'vitest';
-
 describe('DatasetShow', () => {
   beforeEach(mockLogin);
 

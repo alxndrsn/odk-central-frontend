@@ -645,8 +645,12 @@ class MockHttp {
       if (this._request != null) {
         // If there has been a navigation, then wait for any async components
         // associated with the route to load.
-        if (router != null && router.currentRoute.value !== routeBefore)
+        if (router != null && router.currentRoute.value !== routeBefore) {
+					await router.isReady();
           await wait();
+				}
+
+				await new Promise(resolve => setTimeout(resolve, 0));
 
         this._checkStateBeforeRequest();
         await this._request(this._component);

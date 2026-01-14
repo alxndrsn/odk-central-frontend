@@ -70,34 +70,13 @@ describe('AccountClaim', () => {
   describe('after a successful response', () => {
     const submit = () => load('/account/claim?token=foo')
       .request(async (app) => {
-        console.log('Current Route:', app.vm.$route.fullPath);
-
-        await Promise.resolve();
-        await app.vm.$router.isReady();
-        await new Promise(resolve => setTimeout(resolve, 0));
-        const { nextTick } = await import('vue');
-        await nextTick();
-
-			  await new Promise(resolve => setTimeout(resolve, 0));
-				await app.vm.$nextTick();
-				await new Promise(resolve => setTimeout(resolve, 0));
-
-				// 3. Debug: If it still fails, let's see what the Mock Server is doing
-				// This will show if there are requests that haven't been matched yet
-				// (Assuming 'this' in your snippet is part of a MockHttp instance)
-				
-				const c = app.findComponent(AccountClaim);
-				if (!c.exists()) {
-					throw new Error("Mock data likely not loaded. Container content: " + app.get('.container-fluid').html());
-				}
-
         const component = app.getComponent(AccountClaim);
         await component.get('input').setValue('testPassword');
         return component.get('form').trigger('submit');
       })
       .respondWithSuccess();
 
-    it.only('redirects to login', async () => {
+    it('redirects to login', async () => {
       const app = await submit();
       app.vm.$route.path.should.equal('/login');
     });
