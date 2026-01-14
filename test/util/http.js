@@ -658,12 +658,13 @@ class MockHttp {
     } finally {
       // Wait for any responses to be processed.
       await wait();
+			await new Promise(resolve => setTimeout(resolve, 0));
       if (pollWork != null) await waitUntil(() => pollWork(this._component));
       http.respond(null);
       removeRouterHandler();
     }
 
-    this._checkStateAfterWait();
+    await this._checkStateAfterWait();
     const callbackResult = await callback(this._component);
     return { component: this._component, result: callbackResult };
   }
@@ -826,7 +827,9 @@ class MockHttp {
     }
   }
 
-  _checkStateAfterWait() {
+  async _checkStateAfterWait() {
+		await new Promise(resolve => setTimeout(resolve, 0));
+
     if (this._errorFromRouter != null) {
       console.error(this._errorFromRouter);
       throw new Error('a navigation threw an error');
@@ -849,7 +852,8 @@ class MockHttp {
       throw new Error('request without response: no response specified for request');
     } else if (this._orderedResponsesRequested < this._orderedResponses.length) {
       this._listRequestResponseLog();
-      throw new Error('response without request: not all responses were requested');
+      const count = this._orderedResponses.length - this._orderedResponsesRequested;
+      throw new Error(`response without request: ${count} mock response(s) were never requested`);
     } else if (this._orderedResponsesReturned !== this._orderedResponses.length) {
       this._listRequestResponseLog();
       throw new Error('All responses were requested, but not all were returned in time. By default, all responses are expected to be returned in microtasks, before the next task. You may need to use the pollWork option of afterResponses().');
