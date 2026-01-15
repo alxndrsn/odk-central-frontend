@@ -646,11 +646,11 @@ class MockHttp {
         // If there has been a navigation, then wait for any async components
         // associated with the route to load.
         if (router != null && router.currentRoute.value !== routeBefore) {
-					await router.isReady();
+          await router.isReady();
           await wait();
-				}
+        }
 
-				await new Promise(resolve => setTimeout(resolve, 0));
+        await new Promise(resolve => setTimeout(resolve, 0));
 
         this._checkStateBeforeRequest();
         await this._request(this._component);
@@ -658,7 +658,7 @@ class MockHttp {
     } finally {
       // Wait for any responses to be processed.
       await wait();
-			await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise(resolve => setTimeout(resolve, 0));
       if (pollWork != null) await waitUntil(() => pollWork(this._component));
       http.respond(null);
       removeRouterHandler();
@@ -828,7 +828,7 @@ class MockHttp {
   }
 
   async _checkStateAfterWait() {
-		await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise(resolve => setTimeout(resolve, 0));
 
     if (this._errorFromRouter != null) {
       console.error(this._errorFromRouter);
