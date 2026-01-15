@@ -30,3 +30,6 @@ npm-debug.log*
 public/index.html
 test-results
 playwright-report
+
+# vitest screenshots
+__screenshots__
