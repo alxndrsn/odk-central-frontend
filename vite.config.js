@@ -78,10 +78,11 @@ export default defineConfig(({ mode }) => ({
     include: ['test/**/*.{test,spec}.{js,ts,jsx,tsx}'],
     browser: {
       enabled: true,
-      provider: playwright(),
+      headless: true,
       instances: [
         { browser: 'chromium' },
       ],
+      provider: playwright(),
     },
     onConsoleLog(log) {
       return true;
