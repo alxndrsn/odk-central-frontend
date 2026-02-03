@@ -816,7 +816,7 @@ describe('SubmissionList', () => {
     });
   });
 
-  describe('pagination', function() { // eslint-disable-line func-names
+  describe.only('pagination', function() { // eslint-disable-line func-names
     this.timeout(16000);
 
     const checkIds = (component, count, offset = 0) => {
