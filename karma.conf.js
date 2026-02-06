@@ -37,7 +37,7 @@ webpackConfigForKarma.module.rules.push({
 
 module.exports = (config) => {
   config.set({
-    frameworks: ['webpack', 'mocha'],
+    frameworks: ['webpack', 'mocha', 'source-map-support'],
     files: [
       'test/index.js',
       { pattern: 'public/fonts/icomoon.ttf', served: true, included: false },
@@ -63,7 +63,10 @@ module.exports = (config) => {
     reporters: ['spec'],
     singleRun: true,
     client: {
-      mocha: { grep: process.env.TEST_PATTERN || '.' }
+      mocha: {
+        grep: process.env.TEST_PATTERN || '.',
+        timeout: 4000,
+      },
     },
     customLaunchers: {
       ChromeDebugging: {
