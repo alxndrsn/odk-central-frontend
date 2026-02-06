@@ -8,7 +8,7 @@ import { noop } from '../../src/util/util';
 const i18n = createCentralI18n().global;
 const createCSV = (text) => new File([text], 'my_data.csv');
 
-describe.only('util/csv', () => {
+describe('util/csv', () => {
   describe('parseCSVHeader()', () => {
     it('returns the values of the first row', async () => {
       const csv = createCSV('a,"b,c","d\ne"\n1,2,3');
