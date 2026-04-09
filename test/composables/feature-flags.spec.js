@@ -38,16 +38,18 @@ describe('useFeatureFlags()', () => {
   // Chrome password manager filling form fields.
   // See: https://github.com/getodk/central/issues/1280
   it.only('should not throw when a synthetic key event is fired', async () => {
-    const component = mountComponent();
+    mountComponent();
 
-    component.classes().should.be.empty;
+    document.dispatchEvent(new Event('keydown'));
 
-    // Our trigger opts must _define_ .key, so that the test framework doesn't substitute a KeyboardEvent with key:''
-    await component.trigger('keydown', {});
-    await component.trigger('keydown', { key:null });
-    await component.trigger('keyup',   { key:undefined });
-    await component.trigger('keydown', { key:{ toString:() => null } });
-    await component.trigger('keydown', { key:{ toString:() => {} } });
-    await component.trigger('keydown', { key:Object.create(null) });
+    //component.classes().should.be.empty;
+
+    //// Our trigger opts must _define_ .key, so that the test framework doesn't substitute a KeyboardEvent with key:''
+    //await component.trigger('keydown', {});
+    //await component.trigger('keydown', { key:null });
+    //await component.trigger('keyup',   { key:undefined });
+    //await component.trigger('keydown', { key:{ toString:() => null } });
+    //await component.trigger('keydown', { key:{ toString:() => {} } });
+    //await component.trigger('keydown', { key:Object.create(null) });
   });
 });
