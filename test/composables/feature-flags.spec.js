@@ -33,4 +33,15 @@ describe('useFeatureFlags()', () => {
 
     component.classes().should.be.empty;
   });
+
+  // Occasionally synthetic events can be fired without a .key prop, e.g.
+  // Chrome password manager filling form fields.
+  // See: https://github.com/getodk/central/issues/1280
+  it('should not throw when a synthetic key event is fired', async () => {
+    const component = mountComponent();
+
+    component.classes().should.be.empty;
+
+    await component.trigger('keydown', {});
+  });
 });
