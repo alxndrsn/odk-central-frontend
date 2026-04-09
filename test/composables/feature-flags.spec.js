@@ -43,5 +43,6 @@ describe('useFeatureFlags()', () => {
     component.classes().should.be.empty;
 
     await component.trigger('keydown', {});
+    await component.trigger('keyup',   {});
   });
 });
