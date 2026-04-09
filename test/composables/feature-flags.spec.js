@@ -42,7 +42,10 @@ describe('useFeatureFlags()', () => {
 
     component.classes().should.be.empty;
 
+    // Our trigger opts must _define_ .key, so that the test framework doesn't substitute a KeyboardEvent with key:''
     await component.trigger('keydown', {});
-    await component.trigger('keyup',   {});
+    await component.trigger('keydown', { key:null });
+    await component.trigger('keyup',   { key:undefined });
+    await component.trigger('keydown', { key:Object.create(null) });
   });
 });
