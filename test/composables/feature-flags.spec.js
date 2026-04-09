@@ -46,6 +46,8 @@ describe('useFeatureFlags()', () => {
     await component.trigger('keydown', {});
     await component.trigger('keydown', { key:null });
     await component.trigger('keyup',   { key:undefined });
+    await component.trigger('keydown', { key:{ toString:() => null } });
+    await component.trigger('keydown', { key:{ toString:() => {} } });
     await component.trigger('keydown', { key:Object.create(null) });
   });
 });
