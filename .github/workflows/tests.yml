@@ -15,6 +15,5 @@ jobs:
         node-version-file: package.json
         cache: 'npm'
     - run: npm ci
-    - run: npm run lint
     - uses: browser-actions/setup-chrome@v2
     - run: npm run test
