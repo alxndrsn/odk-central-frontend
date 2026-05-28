@@ -40,8 +40,38 @@ test.describe('ODK Web Forms', () => {
   test.describe('all old URLs should be working', () => {
     const oldUrls = [
       {
+        description: 'New Submission',
+        url: ({ enketoId }) => `/-/${enketoId}`, requireLogin: true
+      }, {
+        description: 'Edit Submission',
+        url: ({ enketoId, instanceId }) => `/-/edit/${enketoId}?instance_id=${instanceId}`, requireLogin: true
+      }, {
+        description: 'Preview Form',
+        url: ({ enketoId }) => `/-/preview/${enketoId}`, requireLogin: true
+      }, {
+        description: 'Preview Web Forms',
+        url: ({ xmlFormId }) => `/#/projects/${projectId}/forms/${xmlFormId}/preview`, requireLogin: true
+      }, {
+        description: 'New Draft Submission',
+        url: ({ draftEnketoId }) => `/-/${draftEnketoId}`, requireLogin: true
+      }, {
+        description: 'Prevew Draft Form',
+        url: ({ draftEnketoId }) => `/-/preview/${draftEnketoId}`, requireLogin: true
+      }, {
         description: 'Preview Draft Web Form',
-        url: ({ xmlFormId }) => `/projects/${projectId}/forms/${xmlFormId}/draft/preview`, requireLogin: true
+        url: ({ xmlFormId }) => `/#/projects/${projectId}/forms/${xmlFormId}/draft/preview`, requireLogin: true
+      }, {
+        description: 'Public Link',
+        url: ({ enketoId, st }) => `/-/single/${enketoId}?st=${st}`, requireLogin: false
+      }, {
+        description: 'Single Submission Public Link',
+        url: ({ enketoOnceId, st }) => `/-/single/${enketoOnceId}?st=${st}`, requireLogin: false
+      }, {
+        description: 'Offline Submissions',
+        url: ({ enketoId }) => `/-/x/${enketoId}`, requireLogin: true
+      }, {
+        description: 'Offline Submissions Public Link',
+        url: ({ enketoId, st }) => `/-/x/${enketoId}?st=${st}`, requireLogin: false
       },
     ];
 
@@ -52,20 +82,14 @@ test.describe('ODK Web Forms', () => {
         const { instanceId } = firstSubmission;
         const { token: st } = publicLink;
 
-        page.on('response', response => {
-          const request = response.request();
-          const headers = response.headers();
-          console.log(`[CSP] ${response.status()} ${response.url()}:`, headers);
-        });
-
         if (t.requireLogin) {
           await login(page);
+
+          // prevent dom re-use for fragment urls (/#/...)
+          await page.goto('about:blank');
         }
 
-        const url = appUrl + t.url({ enketoId, enketoOnceId, draftEnketoId, xmlFormId, instanceId, st });
-        console.log('[CSP] Navigating to:', url);
-        const res = await page.goto(url);
-        console.log('[CSP] response headers:', res?.headers());
+        await page.goto(appUrl + t.url({ enketoId, enketoOnceId, draftEnketoId, xmlFormId, instanceId, st }));
 
         if (t.draft) {
           await expect(page.getByRole('heading', { name: `${publishedForm.name} - v2` })).toBeVisible();
