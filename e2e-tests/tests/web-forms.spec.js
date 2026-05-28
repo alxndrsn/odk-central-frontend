@@ -82,6 +82,12 @@ test.describe('ODK Web Forms', () => {
         const { instanceId } = firstSubmission;
         const { token: st } = publicLink;
 
+        page.on('response', response => {
+          const request = response.request();
+          const headers = response.headers();
+          console.log(`[CSP] ${response.status()} ${response.url()}:`, headers);
+        });
+
         if (t.requireLogin) {
           await login(page);
 
@@ -89,7 +95,11 @@ test.describe('ODK Web Forms', () => {
           await page.goto('about:blank');
         }
 
-        await page.goto(appUrl + t.url({ enketoId, enketoOnceId, draftEnketoId, xmlFormId, instanceId, st }));
+        const url = appUrl + t.url({ enketoId, enketoOnceId, draftEnketoId, xmlFormId, instanceId, st });
+        console.log('[CSP] Navigating to:', url);
+        const res = await page.goto(url);
+        console.log('[CSP] response headers:', res?.headers());
+
 
         if (t.draft) {
           await expect(page.getByRole('heading', { name: `${publishedForm.name} - v2` })).toBeVisible();
