@@ -65,7 +65,7 @@ test.describe('ODK Web Forms', () => {
         const url = appUrl + t.url({ enketoId, enketoOnceId, draftEnketoId, xmlFormId, instanceId, st });
         console.log('[CSP] Navigating to:', url);
         const res = await page.goto(url);
-        console.log('[CSP] response headers:', res.headers());
+        console.log('[CSP] response headers:', res?.headers());
 
         if (t.draft) {
           await expect(page.getByRole('heading', { name: `${publishedForm.name} - v2` })).toBeVisible();
