@@ -41,7 +41,7 @@ test.describe('ODK Web Forms', () => {
     const oldUrls = [
       {
         description: 'Preview Draft Web Form',
-        url: ({ xmlFormId }) => `/#/projects/${projectId}/forms/${xmlFormId}/draft/preview`, requireLogin: true
+        url: ({ xmlFormId }) => `/projects/${projectId}/forms/${xmlFormId}/draft/preview`, requireLogin: true
       },
     ];
 
