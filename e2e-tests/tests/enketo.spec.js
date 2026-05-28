@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import BackendClient from '../backend-client';
+import { login } from '../util';
 
 const appUrl = process.env.ODK_URL;
 const user = process.env.ODK_USER;
@@ -24,18 +25,6 @@ test.beforeAll(async ({ playwright }, testInfo) => {
 test.afterAll(async () => {
   await backendClient.dispose();
 });
-
-const login = async (page) => {
-  await page.goto(appUrl);
-  await expect(page.getByRole('heading', { name: 'Welcome to ODK Central' })).toBeVisible();
-
-  await page.getByPlaceholder('email address').fill(user);
-  await page.getByPlaceholder('password').fill(password);
-
-  await page.getByRole('button', { name: 'Log in' }).click();
-
-  await page.waitForURL(appUrl);
-};
 
 test.describe('Enketo', () => {
   test.describe('all old URLs should be working', () => {
@@ -83,10 +72,7 @@ test.describe('Enketo', () => {
         const { token: st } = publicLink;
 
         if (t.requireLogin) {
-          await login(page);
-
-          // prevent dom re-use for fragment urls (/#/...)
-          await page.goto('about:blank');
+          await login(page, { freshContext: true });
         }
 
         await page.goto(appUrl + t.url({ enketoId, enketoOnceId, draftEnketoId, xmlFormId, instanceId, st }));
