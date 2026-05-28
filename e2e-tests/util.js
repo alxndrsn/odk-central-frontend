@@ -5,6 +5,11 @@ const user = process.env.ODK_USER;
 const password = process.env.ODK_PASSWORD;
 
 const login = async (page, { freshContext }={}) => {
+  if (freshContext) {
+    // prevent DOM re-use
+    page = await page.context().newPage();
+  }
+
   await page.goto(appUrl);
   await expect(page.getByRole('heading', { name: 'Welcome to ODK Central' })).toBeVisible();
 
@@ -14,11 +19,6 @@ const login = async (page, { freshContext }={}) => {
   await page.getByRole('button', { name: 'Log in' }).click();
 
   await page.waitForURL(appUrl);
-
-  if (freshContext) {
-    // prevent DOM re-use
-    await page.goto('about:blank');
-  }
 };
 
 export { login };
