@@ -3,8 +3,6 @@ import BackendClient from '../backend-client';
 import { login } from '../util';
 
 const appUrl = process.env.ODK_URL;
-const user = process.env.ODK_USER;
-const password = process.env.ODK_PASSWORD;
 const projectId = process.env.PROJECT_ID;
 
 let publishedForm;

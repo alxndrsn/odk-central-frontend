@@ -3,6 +3,7 @@ import { expect } from '@playwright/test';
 const appUrl = process.env.ODK_URL;
 const user = process.env.ODK_USER;
 const password = process.env.ODK_PASSWORD;
+const ENCRYPTION_SECRET = 'encryptionsecret';
 
 const login = async (page, { freshContext }={}) => {
   if (freshContext) {
@@ -21,4 +22,7 @@ const login = async (page, { freshContext }={}) => {
   await page.waitForURL(appUrl);
 };
 
-export { login };
+export {
+  login,
+  ENCRYPTION_SECRET
+};
