@@ -51,6 +51,7 @@ const test = testBase.extend({
           if(message === 'App in offline-capable mode.' &&  url.includes('/x/')) return;
           if(message === 'App in online-only mode.'     && !url.includes('/x/')) return;
           
+          if(message === 'autosave successful') return;
           if(message === 'Keeping default theme.') return;
         }
 
