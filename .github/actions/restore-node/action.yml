@@ -6,8 +6,8 @@ inputs:
     required: false
 
 runs:
-  - using: 'composite'
-
+  using: 'composite'
+  steps:
   - uses: actions/setup-node@v6
     id: setup-node
     with:
