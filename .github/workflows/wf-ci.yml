@@ -96,9 +96,8 @@ jobs:
           npm run integration-test-browser:${{ matrix.browser }} -w=packages/xforms-engine
 
   xpath:
-    name: 'xpath'
+    name: '@getodk/xpath'
     runs-on: 'ubuntu-latest'
-    timeout-minutes: 2
 
     strategy:
       fail-fast: false
