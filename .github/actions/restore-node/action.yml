@@ -4,7 +4,7 @@ inputs:
   node-version:
     description: override NodeJS version supplied in package.json
     required: false
-    
+
 runs:
   - using: 'composite'
 
