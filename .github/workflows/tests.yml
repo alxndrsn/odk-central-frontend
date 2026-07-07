@@ -27,6 +27,8 @@ jobs:
     - run: npm run build
     - run: npm run lint
     - run: ./bin/check-bundle-size.js
+
+    # ids, keys, paths must all match the values in actions/restore-node
     - uses: 'actions/cache/save@v6'
       id: cache-install
       with:
@@ -41,6 +43,7 @@ jobs:
           dist
           packages/*/dist
         key: build-${{ github.sha }}
+
     - name: Upload Release Artefact
       if: github.ref_type == 'tag'
       env:
