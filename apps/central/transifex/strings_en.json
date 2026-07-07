@@ -1455,6 +1455,15 @@
         "num_dataset_properties_deleted": {
           "string": "Number of Entity property delete events"
         },
+        "num_owner_only_datasets_per_project": {
+          "string": "Number of Entity Lists restricted to Owner Only"
+        },
+        "num_custom_user_properties": {
+          "string": "Number of custom User Properties"
+        },
+        "num_user_property_filtered_datasets": {
+          "string": "Number of Entity Lists restricted by User Properties"
+        },
         "num_properties": {
           "string": "Number of Properties"
         },
@@ -3438,13 +3447,13 @@
       },
       "field": {
         "note": {
-          "string": "Notes",
+          "string": "Version notes",
           "developer_comment": "This is the text of a form field."
         }
       },
       "placeholder": {
         "note": {
-          "string": "Add optional publishing notes…"
+          "string": "Describe this version (optional)…"
         }
       }
     },
@@ -5317,6 +5326,9 @@
       "deleted": {
         "string": "(deleted)",
         "developer_comment": "This text is shown next to an Entity when the Entity has been deleted."
+      },
+      "entityErrorInstructions": {
+        "string": "Check the Form definition and Submission for issues. After making corrections, edit the Submission and submit to retry processing."
       }
     },
     "SubmissionFieldDropdown": {
@@ -5724,11 +5736,11 @@
     },
     "WhatsNew": {
       "title": {
-        "string": "🎨 Branded login pages, Entity List cleanups, and file uploads in Web Forms",
+        "string": "Entity Filtering 🎯 and ODK Web Forms by Default 🌐",
         "developer_comment": "This is the title at the top of a pop-up."
       },
       "body": {
-        "string": "Customize the login page with your branding, clean up Entity Lists and Properties when they are no longer needed, and upload any file to your Web Forms."
+        "string": "Control which Entities each App User or Public Link receives with filtering rules based on custom properties. Plus, Web Forms is now the default web form experience, bringing a faster, more intuitive experience for form previews, data editing, and web-based form filling."
       }
     }
   },
