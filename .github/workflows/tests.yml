@@ -90,6 +90,7 @@ jobs:
     # see: https://github.com/getodk/central-backend/pull/1642
     # see: https://github.com/actions/runner/issues/4030
     - run: sudo apt-get remove --purge man-db
+
     - uses: actions/checkout@v6
       with:
         path: client
@@ -133,13 +134,11 @@ jobs:
       name: Docker Container Logs
       working-directory: central
       run: docker compose logs || true
-
   wf-tests:
     name: 'Run Web Forms Tests'
     needs:
     - static-checks
     uses: ./.github/workflows/wf-ci.yml
-
   wf-e2e-tests:
     name: 'Run Web Forms E2E Tests'
     needs:
