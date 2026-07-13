@@ -249,7 +249,7 @@ export default defineConfig(
 			reportUnusedDisableDirectives: true,
 		},
 
-		ignores: ['src/init.js'],
+		ignores: ['public/init.js'],
 
 		plugins: {
 			'no-only-tests': noOnlyTestsPlugin, // eslint-disable-line @typescript-eslint/no-unsafe-assignment
