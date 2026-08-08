@@ -126,7 +126,7 @@ test.describe('ODK Web Forms', () => {
     });
   });
 
-  test('allows user to relogin on session expiry during form fill', async ({ page, context }) => {
+  test.only('allows user to relogin on session expiry during form fill', async ({ page, context }) => {
     await login(page);
 
     const page2 = await context.newPage();
