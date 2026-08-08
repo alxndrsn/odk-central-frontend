@@ -121,7 +121,7 @@ export default {
           }
         })
         .catch(err => {
-          if (!canceled && !isUnloading) {
+          if (!canceled && isUnloading <= 0) {
             this.logger.error('async-route', 'loadError:', err);
 
             // It would be ideal to show a more informative error message.
