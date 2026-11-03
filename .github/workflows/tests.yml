@@ -61,7 +61,8 @@ jobs:
       run: |
         git clone -b next https://github.com/getodk/central.git
         cd central
-        git checkout adaff4b0647b616d3b8b26e5391c1bf84322ff71
+        #git checkout adaff4b0647b616d3b8b26e5391c1bf84322ff71 # secrets dependency change
+        git checkout 2b0f92ba3fb8f619f226fa81ef372b3eff3746d8 # change ubuntu test version
         git submodule set-branch -b master server
         git submodule update --init --remote server
         mv ../client .
