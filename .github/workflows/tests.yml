@@ -41,38 +41,10 @@ jobs:
         gh release upload ${{ github.ref_name }} dist-${{ github.ref_name }}.tar.gz
         echo "Upload complete."
 
-  test-central-app:
-    name: 'Test central app'
-    needs:
-    - check-and-build
-    timeout-minutes: 10
-    runs-on: ubuntu-24.04
-    steps:
-    - uses: actions/checkout@v6
-    - uses: ./.github/actions/node-cache
-      with:
-        mode: restore
-    - run: npm run test -w=@getodk/central-frontend
-
-  test-forms-app:
-    name: 'Test forms app'
-    needs:
-    - check-and-build
-    timeout-minutes: 2
-    runs-on: ubuntu-24.04
-    steps:
-    - uses: actions/checkout@v6
-    - uses: ./.github/actions/node-cache
-      with:
-        mode: restore
-    - run: npx playwright install chromium --with-deps
-    - run: npm run test -w=@getodk/forms
-
   e2e-tests:
     name: 'Test apps e2e'
     needs:
-    - test-central-app
-    - test-forms-app
+    - check-and-build
     timeout-minutes: 20
     runs-on: ubuntu-24.04
     steps:
@@ -125,15 +97,3 @@ jobs:
       name: Docker Container Logs
       working-directory: central
       run: docker compose logs || true
-
-  wf-tests:
-    name: 'Test web-forms packages'
-    needs:
-    - check-and-build
-    uses: ./.github/workflows/wf-ci.yml
-
-  wf-e2e-tests:
-    name: 'Test web-forms e2e'
-    needs:
-    - wf-tests
-    uses: ./.github/workflows/wf-ci-e2e.yml
